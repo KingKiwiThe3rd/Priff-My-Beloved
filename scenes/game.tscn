@@ -463,4 +463,4 @@ offset_bottom = -56.0
 theme_override_colors/font_color = Color(0.631373, 0.882353, 0.129412, 1)
 theme_override_fonts/font = ExtResource("11_k52hj")
 theme_override_font_sizes/font_size = 56
-text = "Kill yourself quickly"
+text = "Kill yourself slowly"
