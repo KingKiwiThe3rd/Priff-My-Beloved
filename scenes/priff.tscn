@@ -1,14 +1,14 @@
 [gd_scene load_steps=43 format=3 uid="uid://bowmp2irv84q6"]
 
-[ext_resource type="Texture2D" uid="uid://dwr20yab21rnf" path="res://assets/sprites/Priff my beloved_dash.png" id="1_b3fik"]
-[ext_resource type="Texture2D" uid="uid://d1c02k04rrfnx" path="res://assets/sprites/Priff my beloved_fall.png" id="1_dq3ae"]
-[ext_resource type="Texture2D" uid="uid://dy3bkk8qnnsu5" path="res://assets/sprites/Priff my beloved_idle-Sheet.png" id="1_vavi7"]
-[ext_resource type="Texture2D" uid="uid://ylohvb1w4fi6" path="res://assets/sprites/Priff my beloved_anticipationJump.png" id="2_su55d"]
-[ext_resource type="Texture2D" uid="uid://d2g063wymlypo" path="res://assets/sprites/Priff my beloved_jump.png" id="3_4f2gj"]
-[ext_resource type="Texture2D" uid="uid://byinmhwmxm3ij" path="res://assets/sprites/Priff my beloved_walk-Sheet.png" id="3_qtxau"]
-[ext_resource type="Script" path="res://scripts/dash_manager.gd" id="7_qdgp1"]
-[ext_resource type="Script" path="res://scripts/ui_manager.gd" id="8_2i0o8"]
-[ext_resource type="FontFile" uid="uid://ceoyep7e0baws" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_posfk"]
+[ext_resource type="Texture2D" uid="uid://df7e151h6chj6" path="res://assets/sprites/Priff my beloved_dash.png" id="1_b3fik"]
+[ext_resource type="Texture2D" uid="uid://c6fvnvfij3rbi" path="res://assets/sprites/Priff my beloved_fall.png" id="1_dq3ae"]
+[ext_resource type="Texture2D" uid="uid://c7yt638exp1he" path="res://assets/sprites/Priff my beloved_idle-Sheet.png" id="1_vavi7"]
+[ext_resource type="Texture2D" uid="uid://i0lnjj6ilxaw" path="res://assets/sprites/Priff my beloved_anticipationJump.png" id="2_su55d"]
+[ext_resource type="Texture2D" uid="uid://br2tp8xov01g6" path="res://assets/sprites/Priff my beloved_jump.png" id="3_4f2gj"]
+[ext_resource type="Texture2D" uid="uid://4vc3co2h4oqj" path="res://assets/sprites/Priff my beloved_walk-Sheet.png" id="3_qtxau"]
+[ext_resource type="Script" uid="uid://4l2s8w836mhf" path="res://scripts/dash_manager.gd" id="7_qdgp1"]
+[ext_resource type="Script" uid="uid://bi8cd36alxvtx" path="res://scripts/ui_manager.gd" id="8_2i0o8"]
+[ext_resource type="FontFile" uid="uid://b8i13b3yqmoai" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_posfk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5u1xv"]
 atlas = ExtResource("1_dq3ae")
