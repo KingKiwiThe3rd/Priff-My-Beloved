@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash_manager = $DashManager  # Reference the DashManager
+@onready var TSlow_overlay = get_node("../CanvasLayer/TSlowOverlay")
+
 
 var JUMP_AMOUNT = 2  # Number of jumps allowed (reset on ground)
 const JUMP_VELOCITY = -175.0
@@ -20,6 +22,11 @@ const AIR_CONTROL = 200.0
 const COYOTE_TIME = 0.1
 var coyote_timer = 0.0
 var was_on_floor = false  
+
+var is_slow_motion = false
+var slow_motion_duration = 1.0
+var slow_motion_scale = 0.3  # Slower = lower value (0.3 = 30% normal speed)
+var slow_motion_timer := 0.0
 
 func _ready():
 	dash_manager.player = self  # Link Priff to DashManager
@@ -73,3 +80,23 @@ func _physics_process(delta: float) -> void:
 			animated_sprite_2d.play("falling")
 	
 	move_and_slide()
+	
+func _process(delta):
+	if Input.is_action_just_pressed("time_slow") and not is_slow_motion:
+		start_slow_motion()
+
+	if is_slow_motion:
+		slow_motion_timer -= delta
+		if slow_motion_timer <= 0:
+			stop_slow_motion()
+
+func start_slow_motion():
+	Engine.time_scale = slow_motion_scale
+	slow_motion_timer = slow_motion_duration
+	is_slow_motion = true
+	TSlow_overlay.visible=true
+
+func stop_slow_motion():
+	Engine.time_scale = 1.0
+	is_slow_motion = false
+	TSlow_overlay.visible=false

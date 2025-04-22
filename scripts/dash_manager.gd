@@ -7,6 +7,8 @@ const DASH_DECAY = 1750.0
 const DASH_TIME = 0.2
 const DASH_COOLDOWN = 0.45
 
+@onready var priff = get_node("/root/Game/Priff")
+
 var dash_timer = 0.0
 var dash_cooldown_timer = 0.0
 var is_dashing = false
@@ -49,6 +51,8 @@ func try_dash():
 			air_dashes_used += 1
 
 func start_dash():
+	if(priff.is_slow_motion==true):
+		priff.stop_slow_motion()
 	is_dashing = true
 	var dash_direction = -1 if not player.animated_sprite_2d.flip_h else 1
 	player.velocity.x = dash_direction * DASH_INITIAL_BOOST
