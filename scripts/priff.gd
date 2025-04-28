@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash_manager = $DashManager  # Reference the DashManager
 @onready var TSlow_overlay = get_node("../CanvasLayer/TSlowOverlay")
-
+var spawn_point : Vector2
 
 var JUMP_AMOUNT = 2  # Number of jumps allowed (reset on ground)
 const JUMP_VELOCITY = -175.0
@@ -30,6 +30,11 @@ var slow_motion_timer := 0.0
 
 func _ready():
 	dash_manager.player = self  # Link Priff to DashManager
+	
+	# If there is a saved checkpoint, spawn at it
+	if GameManager.checkpoint_position != Vector2.ZERO:
+		global_position = GameManager.checkpoint_position
+		spawn_point = GameManager.checkpoint_position
 
 func _physics_process(delta: float) -> void:
 	# Reset jumps when landing
@@ -80,6 +85,14 @@ func _physics_process(delta: float) -> void:
 			animated_sprite_2d.play("falling")
 	
 	move_and_slide()
+	
+func set_spawn_point(new_spawn_point: Vector2):
+	print("Priff has gotten the coin")
+	spawn_point = new_spawn_point
+
+func die_and_respawn():
+	global_position = spawn_point
+	velocity = Vector2.ZERO
 	
 func _process(delta):
 	if Input.is_action_just_pressed("time_slow") and not is_slow_motion:
