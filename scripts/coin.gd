@@ -1,28 +1,18 @@
 extends Area2D
 
-func _ready() -> void:
+func _ready():
+	# ensure you’ve hooked up the “body_entered” signal in the editor
 	print("im a coin")
-	# Make sure collision is enabled
-	monitoring = true
-	monitorable = true
-
+	pass
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Priff":
-		emit_signal("coin_collected")
-		
-		# Optional: Play collection animation/sound
-		# $AnimationPlayer.play("collect")
-		# $AudioStreamPlayer.play()
-		
-		# Queue free with a slight delay if using animations
-		# await $AnimationPlayer.animation_finished
-		 # Try to get the UI Manager
-		var player = body
-		var ui_manager = player.get_node_or_null("UIManager")
-		if ui_manager:
-			print("UI Manager found! Adding point...")
-			ui_manager.add_point()
-		else:
-			print("UI Manager NOT found on player!")
-		queue_free()
+		# 1) update GameManager
+		GameManager.add_point()
+	# 2) update UI under Priff
+	var ui = body.get_node_or_null("UIManager")
+	if ui:
+		ui.add_point()
+	else:
+		print("UIManager not found under Priff!")
+	queue_free()
