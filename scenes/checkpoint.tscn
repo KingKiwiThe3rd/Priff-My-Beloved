@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://yq1qck1v0qgy"]
 
 [ext_resource type="Script" uid="uid://b8rwfgu3wkqh2" path="res://scripts/checkpoint.gd" id="1_r6hke"]
-[ext_resource type="Texture2D" uid="uid://ci0fmxlqn6737" path="res://icon.svg" id="2_tnhlw"]
+[ext_resource type="Texture2D" uid="uid://clmw1mrxi32f8" path="res://icon.svg" id="2_tnhlw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s20m7"]
 size = Vector2(8, 20)
