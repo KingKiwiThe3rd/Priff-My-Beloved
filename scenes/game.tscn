@@ -2,14 +2,23 @@
 
 [ext_resource type="PackedScene" uid="uid://bowmp2irv84q6" path="res://scenes/priff.tscn" id="1_pqc4m"]
 [ext_resource type="Script" uid="uid://cl888tpmf610n" path="res://scripts/priff.gd" id="2_vn441"]
+<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://bssoykq6ivdx7" path="res://assets/sprites/world_tileset.png" id="3_5h83q"]
 [ext_resource type="Texture2D" uid="uid://b5g67v11hkst5" path="res://assets/sprites/ap6igho8.png" id="3_i75mv"]
+=======
+[ext_resource type="Texture2D" uid="uid://s7nh266hpih3" path="res://assets/sprites/world_tileset.png" id="3_5h83q"]
+[ext_resource type="Texture2D" uid="uid://dyhd2bigbrg0h" path="res://assets/sprites/ap6igho8.png" id="3_i75mv"]
+>>>>>>> bdaa696cf1dd15eb0761bd4659bcc88554651a7d
 [ext_resource type="PackedScene" uid="uid://qcob8sd6dwbd" path="res://scenes/gplatform.tscn" id="4_7u5vg"]
 [ext_resource type="PackedScene" uid="uid://8u1td8yku887" path="res://scenes/coin.tscn" id="5_awnxt"]
 [ext_resource type="PackedScene" uid="uid://bl7seeri7bbgm" path="res://scenes/slime.tscn" id="6_cicc7"]
 [ext_resource type="PackedScene" uid="uid://xxt3xkunx0u3" path="res://scenes/kill_zone.tscn" id="6_tg8no"]
 [ext_resource type="PackedScene" uid="uid://nljcjg4c58wi" path="res://scenes/area_2d.tscn" id="9_l3ayf"]
+<<<<<<< HEAD
 [ext_resource type="FontFile" uid="uid://b8i13b3yqmoai" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="11_k52hj"]
+=======
+[ext_resource type="FontFile" uid="uid://ceoyep7e0baws" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="11_k52hj"]
+>>>>>>> bdaa696cf1dd15eb0761bd4659bcc88554651a7d
 [ext_resource type="PackedScene" uid="uid://yq1qck1v0qgy" path="res://scenes/checkpoint.tscn" id="11_kvpfn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5sh4k"]
@@ -495,3 +504,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.482353, 0.623529, 0.72549, 0.67451)
+
+[node name="RedOverlay" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+color = Color(0.996078, 0, 0, 0.65098)
