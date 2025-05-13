@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://borctkti25q41"]
+[gd_scene load_steps=21 format=3 uid="uid://borctkti25q41"]
 
 [ext_resource type="PackedScene" uid="uid://bowmp2irv84q6" path="res://scenes/priff.tscn" id="1_pqc4m"]
 [ext_resource type="Script" uid="uid://cl888tpmf610n" path="res://scripts/priff.gd" id="2_vn441"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://nljcjg4c58wi" path="res://scenes/area_2d.tscn" id="9_l3ayf"]
 [ext_resource type="FontFile" uid="uid://b8i13b3yqmoai" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="11_k52hj"]
 [ext_resource type="PackedScene" uid="uid://yq1qck1v0qgy" path="res://scenes/checkpoint.tscn" id="11_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://cape8wblct3l7" path="res://scenes/camera_zone.tscn" id="12_dinhu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5sh4k"]
 texture = ExtResource("3_i75mv")
@@ -340,12 +341,6 @@ z_index = 10
 position = Vector2(53, 91)
 script = ExtResource("2_vn441")
 
-[node name="Camera2D" type="Camera2D" parent="Priff"]
-position = Vector2(-1, -2)
-zoom = Vector2(4, 4)
-limit_bottom = 160
-position_smoothing_enabled = true
-
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-5, 0)
 tile_set = SubResource("TileSet_em46e")
@@ -503,3 +498,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 0
 color = Color(0.996078, 0, 0, 0.65098)
+
+[node name="CameraZone" parent="." instance=ExtResource("12_dinhu")]

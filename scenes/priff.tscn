@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bowmp2irv84q6"]
+[gd_scene load_steps=44 format=3 uid="uid://bowmp2irv84q6"]
 
 [ext_resource type="Texture2D" uid="uid://df7e151h6chj6" path="res://assets/sprites/Priff my beloved_dash.png" id="1_b3fik"]
 [ext_resource type="Texture2D" uid="uid://c6fvnvfij3rbi" path="res://assets/sprites/Priff my beloved_fall.png" id="1_dq3ae"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://4l2s8w836mhf" path="res://scripts/dash_manager.gd" id="7_qdgp1"]
 [ext_resource type="Script" uid="uid://bi8cd36alxvtx" path="res://scripts/ui_manager.gd" id="8_2i0o8"]
 [ext_resource type="FontFile" uid="uid://b8i13b3yqmoai" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_posfk"]
+[ext_resource type="Script" uid="uid://dnb3hvg883nlu" path="res://scripts/camera_2d.gd" id="10_vfhwo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5u1xv"]
 atlas = ExtResource("1_dq3ae")
@@ -291,3 +292,11 @@ theme_override_fonts/font = ExtResource("9_posfk")
 theme_override_font_sizes/font_size = 8
 text = "you're score is 0"
 metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(0.4, 0.279999)
+zoom = Vector2(4, 4)
+limit_bottom = 160
+position_smoothing_enabled = true
+script = ExtResource("10_vfhwo")
