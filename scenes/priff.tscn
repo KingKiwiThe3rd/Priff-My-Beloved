@@ -8,12 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://byinmhwmxm3ij" path="res://assets/sprites/Priff my beloved_walk-Sheet.png" id="3_qtxau"]
 [ext_resource type="Script" uid="uid://4l2s8w836mhf" path="res://scripts/dash_manager.gd" id="7_qdgp1"]
 [ext_resource type="Script" uid="uid://bi8cd36alxvtx" path="res://scripts/ui_manager.gd" id="8_2i0o8"]
-<<<<<<< HEAD
 [ext_resource type="FontFile" uid="uid://ceoyep7e0baws" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_posfk"]
-=======
+
 [ext_resource type="FontFile" uid="uid://b8i13b3yqmoai" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_posfk"]
 [ext_resource type="Script" uid="uid://dnb3hvg883nlu" path="res://scripts/camera_2d.gd" id="10_vfhwo"]
->>>>>>> f4285b5d1944fc03a78bbd1d1965297217290d8c
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5u1xv"]
 atlas = ExtResource("1_dq3ae")
