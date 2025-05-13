@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cape8wblct3l7"]
+
+[ext_resource type="Script" uid="uid://cadh5mxcjgo0l" path="res://scripts/camera_zone.gd" id="1_y6if2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00kvm"]
+size = Vector2(100, 490)
+
+[node name="CameraZone" type="Area2D"]
+collision_mask = 4
+script = ExtResource("1_y6if2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(38, -146)
+shape = SubResource("RectangleShape2D_00kvm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

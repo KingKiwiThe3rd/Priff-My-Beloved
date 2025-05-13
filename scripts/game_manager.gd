@@ -6,7 +6,7 @@ var checkpoint_position: Vector2 = Vector2.ZERO
 
 func add_point():
 	coins += 1
-	if coins >= 1:
+	if coins >= 10:
 		_on_ten_coins_reached()
 
 func reset_coins():
