@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://borctkti25q41"]
+[gd_scene load_steps=22 format=3 uid="uid://borctkti25q41"]
 
 [ext_resource type="PackedScene" uid="uid://bowmp2irv84q6" path="res://scenes/priff.tscn" id="1_pqc4m"]
 [ext_resource type="Script" uid="uid://cl888tpmf610n" path="res://scripts/priff.gd" id="2_vn441"]
 [ext_resource type="Texture2D" uid="uid://s7nh266hpih3" path="res://assets/sprites/world_tileset.png" id="3_5h83q"]
 [ext_resource type="Texture2D" uid="uid://dyhd2bigbrg0h" path="res://assets/sprites/ap6igho8.png" id="3_i75mv"]
+[ext_resource type="Script" uid="uid://dnb3hvg883nlu" path="res://scripts/camera_2d.gd" id="3_kvuet"]
 [ext_resource type="PackedScene" uid="uid://qcob8sd6dwbd" path="res://scenes/gplatform.tscn" id="4_7u5vg"]
 [ext_resource type="PackedScene" uid="uid://8u1td8yku887" path="res://scenes/coin.tscn" id="5_awnxt"]
 [ext_resource type="PackedScene" uid="uid://bl7seeri7bbgm" path="res://scenes/slime.tscn" id="6_cicc7"]
@@ -339,7 +340,20 @@ _data = {
 [node name="Priff" parent="." instance=ExtResource("1_pqc4m")]
 z_index = 10
 position = Vector2(53, 91)
+scale = Vector2(1.5, 1.5)
 script = ExtResource("2_vn441")
+
+[node name="Camera2D" type="Camera2D" parent="Priff"]
+position = Vector2(-11, -24)
+scale = Vector2(0.4, 0.279999)
+zoom = Vector2(3, 3)
+limit_bottom = 160
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_top_margin = 0.3
+drag_bottom_margin = 0.3
+script = ExtResource("3_kvuet")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-5, 0)
@@ -500,3 +514,5 @@ grow_horizontal = 0
 color = Color(0.996078, 0, 0, 0.65098)
 
 [node name="CameraZone" parent="." instance=ExtResource("12_dinhu")]
+position = Vector2(14, 75)
+scale = Vector2(1.5, 1.5)

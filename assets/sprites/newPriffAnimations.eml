@@ -1,0 +1,171 @@
+Delivered-To: akivaeagle12@gmail.com
+Received: by 2002:a2e:9449:0:b0:310:85bb:20dc with SMTP id o9csp734485ljh;
+        Tue, 13 May 2025 11:45:25 -0700 (PDT)
+X-Received: by 2002:a05:690c:4489:b0:709:191c:d7df with SMTP id 00721157ae682-70c7f23060emr11032037b3.38.1747161925349;
+        Tue, 13 May 2025 11:45:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1747161925; cv=none;
+        d=google.com; s=arc-20240605;
+        b=jqunyrSald9lpJRRkSn1Y76cFaGjo6XoJEKsSb2lgqoDBdao0rhy4d1LdvnUAIguC+
+         GFUh4kCU50aoAH0MWz8jYzyxu+mvcS1tHb2TZ/MKJsSu2d3Ieo/3XL/of6MtAigS3A7F
+         hmnpQXtP25P1KTTrjzjfWcJcxepdmP+rXfGg6z1pCc39lYrxDpa80RTshDMw42CrJwov
+         5C+bAcp+Q29WXtYLCYfV1brWT8Va5dvvr67l/TYesdYz8/2xHMhhGn+RnmHMkWXzMCCt
+         57JYEk95bZre410Y3pOM3th+ZRyDVwADZW5J5m+wFg89nzCYkC5oJ17meaVL8FkjjUbu
+         ZrUQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=Oiq/L1vLIgeYe4Il4gMVWq8KwtREssuQd/u01JPdCxw=;
+        fh=EnB6ri4BIBrIArqjbubk3pkA3DMEfxXNzNhYP9f+A0g=;
+        b=WynndlculAbbApnBx7FlZZ8A4GDtDIH7sOY7enXu5rAWS3OaxzZkVZia4au/gOJLq8
+         BCNmeXsV76pyOQuR7fG7awvJGt9F1J3Y7MOWmkpeGGXhvj7tIu9wO/FJtkhw3Gfl/8Ne
+         WM8jwOd2wuwtPsKYCX2DlzkQhvLhw7FvKu3hX+kysgSES64pE83ek01iBPsUDYXrmYfO
+         SoZ+luu8lEYwoXs+wogNBFsE2JZ5aSnp3Mp/UxjJI1/3PWDc0pvSF4wryqTQZNHYUiYm
+         k02hb7FO1ZM72cyclB5HPwJ+Ga85w24De+6y6aJL1EDrezHh/KQkrKQuV4WhRLFjouYg
+         dWOg==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b=cNsyGtfV;
+       spf=pass (google.com: domain of dvirkallush07@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=dvirkallush07@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;
+       dara=pass header.i=@gmail.com
+Return-Path: <dvirkallush07@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id 00721157ae682-70a3d762eccsor65333707b3.5.2025.05.13.11.45.25
+        for <akivaeagle12@gmail.com>
+        (Google Transport Security);
+        Tue, 13 May 2025 11:45:25 -0700 (PDT)
+Received-SPF: pass (google.com: domain of dvirkallush07@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b=cNsyGtfV;
+       spf=pass (google.com: domain of dvirkallush07@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=dvirkallush07@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;
+       dara=pass header.i=@gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1747161925; x=1747766725; dara=google.com;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=Oiq/L1vLIgeYe4Il4gMVWq8KwtREssuQd/u01JPdCxw=;
+        b=cNsyGtfVttni7Noox7Co9VlMBCKRDpjNcYtVAiy0NvJmgU59KXvlCxNkdVKR2FLR7e
+         lCoPRoPnReZxqE71sG7KpXc6Yb1KYtpNTx3ARsZuxowfL40C1piPiPouwOIGl8AE/UDf
+         iYI+tUbjscwUhgFq3W8y2k23saSnR/t/k9RxDdnfH0AybMCJ2CfsFGQW3Az6ZY5j5mG3
+         X7BDgF3uhkNL2C2iiIL2RxXHQKiQPu3nAFtTM/XdgDD/mPKBI/4QLYe397Qqxbosqesa
+         OOqFZxQ6eqZCPGlH8vlT/YLcoz9lu6I7jbtHn/3UAjmRe/BiRFbImXqVE3WCwKkEwzOW
+         pjjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747161925; x=1747766725;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Oiq/L1vLIgeYe4Il4gMVWq8KwtREssuQd/u01JPdCxw=;
+        b=Fu8jtnYQLdVlSxoz+qiw+KyrdTqX3ME6tntoXSM+Enhxv1GAe8X4/HRz8vw2qv/DOp
+         MaUVmFU4oUo2/xoSSkeU7zH8c8cmENgmCRN2IqmQ7CingNWbXFIvkQ8DZ425PdeBW3rd
+         usIhYnIwpRoavWECALK807h7UeGoVQtbF0xYtiptKWvZof/oxwOISRdinc2mbOsT12l+
+         LgC2Z1QkvisMel7K7duk43+OxFO7O5cXjdl+vZG47H1MH7A2wm2U4vKFiNcAHrTteagd
+         AEzErxXJ02l5IWPxusHe4gaEfrK0IIJmCsZ17d+wmZ3+H3ygyHuxf6xZEOlSRl1TVDcy
+         gPGA==
+X-Gm-Message-State: AOJu0YyBhRrXW9REMWWtaEQjY0O3DuL76PpMjDlfjkc5yulrnwyc+OLx
+	AO8ipIAxEfpqFK/EPkIgNuCEI6yxRKsjzTIuTRZ1vedoJWkjpHF2tdVRBWnfjuYxsqUbI7XbXHd
+	6eAsprK97eWM96Jtntd13H0nTCeU4ig==
+X-Gm-Gg: ASbGncsu8EyIwwzSMTrLtfmOHy/BYtVv0+UdpOBvMjT8zrSwFr5Y4RfpYENKbDOKYGV
+	L4RuGLuVqwHfrbZv8fpFoGjtkgIGFCYqq7OIcIr2nRvTRx2AeYbiGpGXMti/BP3mLgllAM/21hm
+	WM8BH2qUj5guRaUlY8wDYDAZC0M/AE
+X-Google-Smtp-Source: AGHT+IFFnZ/yNfhpn1hmPI5Hi1NJk7Ds4S+63jZlhGaG4lT8ejPEIGCQkcZL/vaCXc4t7qEATexCihIhtELsTjDZaw0=
+X-Received: by 2002:a05:690c:7245:b0:708:16b0:59bf with SMTP id
+ 00721157ae682-70c7f1f9a83mr10672977b3.26.1747161924622; Tue, 13 May 2025
+ 11:45:24 -0700 (PDT)
+MIME-Version: 1.0
+From: Dvir Kallush <dvirkallush07@gmail.com>
+Date: Tue, 13 May 2025 21:45:11 +0300
+X-Gm-Features: AX0GCFu2XWucMjOKqdI_MWzVkxcg9xH_mYAtdjjSdQXrhaAyPZui48EZgBMdZaM
+Message-ID: <CADsqP=c-eU1L7czz+pHJkwzRiW8T0HKC_qRgUZ3_K8-3NL34ZQ@mail.gmail.com>
+Subject: newPriffAnimations
+To: Akiva Eagle <akivaeagle12@gmail.com>
+Content-Type: multipart/related; boundary="000000000000e24e1c063508d5bc"
+
+--000000000000e24e1c063508d5bc
+Content-Type: multipart/alternative; boundary="000000000000e24e1b063508d5bb"
+
+--000000000000e24e1b063508d5bb
+Content-Type: text/plain; charset="UTF-8"
+
+[image: priff_fall.png][image: priff_idle-Sheet.png][image:
+priff_jump.png][image:
+priff_run-Sheet.png][image: priff_dash.png]
+
+--000000000000e24e1b063508d5bb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><img src=3D"cid:ii_mamv2qhr0" alt=3D"priff_fall.png" width=
+=3D"16" height=3D"16"><img src=3D"cid:ii_mamv2qih1" alt=3D"priff_idle-Sheet=
+.png" width=3D"32" height=3D"16"><img src=3D"cid:ii_mamv2qiz2" alt=3D"priff=
+_jump.png" width=3D"16" height=3D"16"><img src=3D"cid:ii_mamv2qjh3" alt=3D"=
+priff_run-Sheet.png" width=3D"128" height=3D"16"><img src=3D"cid:ii_mamv2qk=
+34" alt=3D"priff_dash.png" width=3D"16" height=3D"16"><br></div>
+
+--000000000000e24e1b063508d5bb--
+--000000000000e24e1c063508d5bc
+Content-Type: image/png; name="priff_idle-Sheet.png"
+Content-Disposition: inline; filename="priff_idle-Sheet.png"
+Content-Transfer-Encoding: base64
+Content-ID: <ii_mamv2qih1>
+X-Attachment-Id: ii_mamv2qih1
+
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAQCAYAAAB3AH1ZAAAAAXNSR0IArs4c6QAAAQhJREFUSIm1
+lDEOgkAURAchsfQMJlDZWEBiQuJZbOzsPAd3oOAkJCQkUNhYQWLvGTRjYSRRdpf9G5lul/3/zZDd
+DyhEkqr9OeRNwT3PG52ZEkna1g2HsrwWpT4fdkqANMDXxyyvuU9jI7isWiXcNUAgKZpq6BJg8S8D
+rjIaSKLAuJ7VQBIFaLrHAE2iACRxPuysm9sE0BpougcAgCTi0Mfncmd5bQ23CaA1EIc+4tD/2mv7
+pxVcEmD0T36hUrC0j/JWuQClYKWB9/s0DxTdBLQFGg18pBsmZdUam7kEGBm4VT1W9yUA4NJdsU5D
+rSGVblWPbbRR1k8FGHQ6FjwdiyFJlteUzHpJ/QuYo5A2rWqYPwAAAABJRU5ErkJggg==
+--000000000000e24e1c063508d5bc
+Content-Type: image/png; name="priff_jump.png"
+Content-Disposition: inline; filename="priff_jump.png"
+Content-Transfer-Encoding: base64
+Content-ID: <ii_mamv2qiz2>
+X-Attachment-Id: ii_mamv2qiz2
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALJJREFUOI21
+U0EKwjAQnFjBo5/QH1QQBN/iH3xH/pC3FAqB5gcpePcNlfWUWLLbbXpwIJAMO7sDOwEEEBFJvASz
+JjbGsBqxgXW+eioAPB9XwxxY5+l+a1Vh14csBoDdlqkS/t/gct6L9wTOFOIhTvlNRCiXojoY4oT2
+1OQDANb5OgdJMEcYP4xjDWqFqgNNUILFdC2R8xAtOlhKY9cHxqlrTILj+wAAeMVRK//BOk+1n+sL
+6zA6+/UbQEsAAAAASUVORK5CYII=
+--000000000000e24e1c063508d5bc
+Content-Type: image/png; name="priff_run-Sheet.png"
+Content-Disposition: inline; filename="priff_run-Sheet.png"
+Content-Transfer-Encoding: base64
+Content-ID: <ii_mamv2qjh3>
+X-Attachment-Id: ii_mamv2qjh3
+
+iVBORw0KGgoAAAANSUhEUgAAAIAAAAAQCAYAAADeWHeIAAAAAXNSR0IArs4c6QAAAe1JREFUaIHt
+mDFrg1AQx89G6Ngte0GnUtrBgBDod+iewSVbNqHfwi1bF4fs+Q6CIMQhIWRSyN4tYyDlOikxPuN7
+7158FXJLeCa/+9/9PcQcACMQEVnXuwqKPl5E1/oqgqovwhttsGEYtd/wFCDDUfSDMBEyzfdcZt6+
+9i/Ll1/qNlCFfhAm+DF2rnJRnDayVH0Aff3L8rUkOg2k6Ovm+9q/yVdue/iea1Ab6HP0tf8H3QXc
+Mka2efV8j5YB0G0gRX9km7DKTiUzsk1ARPA9txN9FUHV5+EbB0C3gVT9VXYCAABEBMcaQPFuFoRJ
+J/oFc+18S31evnEAdBtI1XesATjWoHItzX+5WBX6uvvn5RtH8tI8AHkDzz+DMOEyQVafWreqPLr6
+F+VrA6DbQBX6MvWq1Kfk6erGF8F8Aug2kKJPYVXk0N2/KC+80Gj7D3vn+8UznwBNy4woTq/l/pd8
+FKfw9PMIAADrbNe5vip+s9zCYXhsZfdxDu/2S3k+DI9lPpZ+bQD2cV4x7HlsNTbUVACF9z3XmE0X
+WDTx9vlaFs+zQWNt5IobP/+eCG3gojitGLrPchFcimfVv1luYZ3tYP7VXv/8e1Lxr6ijyM1V+Gy6
+wNl0UT5KgjBBkV03lT8PWVal5mU/t+bPQ5bl5f4Af41N7EMpfo0AAAAASUVORK5CYII=
+--000000000000e24e1c063508d5bc
+Content-Type: image/png; name="priff_dash.png"
+Content-Disposition: inline; filename="priff_dash.png"
+Content-Transfer-Encoding: base64
+Content-ID: <ii_mamv2qk34>
+X-Attachment-Id: ii_mamv2qk34
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAMFJREFUOI3F
+UjsKwkAUnDWCpZ0n2FQiWqwgCN7BG9ikS+c5cocUOUkgEMjeIJ7AzlJYGSuj5G0+guCUM2/mTTGA
+ByTp431QQ2allLjxBiRpOforAJxPOyUaJGnJw970GvPCNmYAmHzz1Yf/B0y7hG34lqraCW6wQVU7
+VLUDSRgdwOgAJJGk5bgGRgeCs5eH4ETAWGNvgz5DG2KmQ4v8HJFoEEcZ59cZ1seV15wXtrtBHGXc
+hMtGuC3uAIDXtNsT/hmeJX5AfuMbRkQAAAAASUVORK5CYII=
+--000000000000e24e1c063508d5bc
+Content-Type: image/png; name="priff_fall.png"
+Content-Disposition: inline; filename="priff_fall.png"
+Content-Transfer-Encoding: base64
+Content-ID: <ii_mamv2qhr0>
+X-Attachment-Id: ii_mamv2qhr0
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALZJREFUOI21
+kk0KwjAUhCem4NKdJ0hvkEJB8Cy9Q8+RO+QshUDA3sCCe3cuBeW5EVHfy48LZzlkvjeBAQQREUm+
+JFUKK6XYGxHgfKy+CgDj0CvWwPlI+53NBqcwv8IAsPrlqqT/Arq2Yd449PWAw/H2AenaBs7HegAA
+EBGs0bBGQ5oH7/iUNZp583IvA2qD2Qa5wLfYTEuLfB9RskFqjVOYmccAp7Bgc14DAC7baxZYLecj
+pb72AAW3PEVp/ST3AAAAAElFTkSuQmCC
+--000000000000e24e1c063508d5bc--
