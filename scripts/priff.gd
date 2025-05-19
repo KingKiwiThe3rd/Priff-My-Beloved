@@ -37,11 +37,11 @@ func _ready():
 		spawn_point = GameManager.checkpoint_position
 
 func _physics_process(delta: float) -> void:
-	# Reset jumps when landing
 	if is_on_floor():
-		JUMP_AMOUNT = 2  # Reset to allow double jump
+		JUMP_AMOUNT = 2
 		coyote_timer = COYOTE_TIME
-		dash_manager.air_dashes_used = 0  # Reset air dashes when on floor
+		dash_manager.air_dashes_used = 0
+		dash_manager.extra_air_dash = false   # ← clear the power‐up here
 	elif coyote_timer > 0:
 		coyote_timer -= delta
 		
