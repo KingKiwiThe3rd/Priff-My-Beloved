@@ -28,19 +28,16 @@ var slow_motion_duration = 1.0
 var slow_motion_scale = 0.3  # Slower = lower value (0.3 = 30% normal speed)
 var slow_motion_timer := 0.0
 
-# at top of your CharacterBody2D script:
-
 enum PlayerState { NORMAL, WALL_SLIDE }
 var state = PlayerState.NORMAL
 
-const WALL_SLIDE_SPEED = 50.0
+const WALL_SLIDE_SPEED = 30.0
 const WALL_HANG_TIME   = 3.0
-const WALL_JUMP_X      = 300.0  # ↑ increase this to round corners
-const WALL_JUMP_Y      = -250.0 # ↓ decrease (make less negative) to trade vertical
+const WALL_JUMP_X      = 130.0
+const WALL_JUMP_Y      = - 200.0
 
-var wall_dir = 0          # +1 if hanging on right wall, -1 on left
+var wall_dir = 0
 var hang_timer = WALL_HANG_TIME
-
 
 func _ready():
 	dash_manager.player = self  # Link Priff to DashManager
@@ -64,7 +61,7 @@ func _physics_process(delta: float) -> void:
 		dash_manager.extra_air_dash = false
 	elif coyote_timer > 0:
 		coyote_timer -= delta
-
+		
 	# 3) Now use input_dir inside the state machine
 	match state:
 		PlayerState.NORMAL:
@@ -72,24 +69,25 @@ func _physics_process(delta: float) -> void:
 				wall_dir = (1 if input_dir > 0 else -1)
 				state = PlayerState.WALL_SLIDE
 				dash_manager.reset_dash()
-		# else: fall through to normal movement/gravity below
+			# else: fall through to normal movement/gravity below
 		PlayerState.WALL_SLIDE:
-			# clamp vertical speed
-			velocity.y = min(velocity.y, WALL_SLIDE_SPEED)
+			# exit conditions
+			if is_on_floor() or not is_on_wall() or input_dir == 0:
+				state = PlayerState.NORMAL
+			# force slow downward slide
+			velocity.y = WALL_SLIDE_SPEED
 			velocity.x = 0
-			# on jump, bounce off
+			# bounce if jump
 			if Input.is_action_just_pressed("Jump"):
 				velocity.x = -wall_dir * WALL_JUMP_X
 				velocity.y = WALL_JUMP_Y
 				state = PlayerState.NORMAL
 			else:
-				# count down your hang time
 				hang_timer -= delta
 				if hang_timer <= 0:
 					state = PlayerState.NORMAL
-				# slide movement only
 			move_and_slide()
-			return  # skip the rest while in wall‐slide
+			return  # skip normal physics while sliding
 			
 	# Jumping
 	if Input.is_action_just_pressed("Jump") and (is_on_floor() or JUMP_AMOUNT > 0 or coyote_timer > 0):
