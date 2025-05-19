@@ -1,12 +1,12 @@
 [gd_scene load_steps=23 format=3 uid="uid://bowmp2irv84q6"]
 
-[ext_resource type="Texture2D" uid="uid://c5kimk0mm3fv5" path="res://assets/sprites/priff_new_look_4.png" id="1_j4on4"]
-[ext_resource type="Texture2D" uid="uid://cjavwqc0381bs" path="res://assets/sprites/priff_new_look_2.png" id="2_vfhwo"]
-[ext_resource type="Texture2D" uid="uid://p2xlcto68yfh" path="res://assets/sprites/priff_new_look_3.png" id="3_k74yn"]
-[ext_resource type="Texture2D" uid="uid://bg7lvq50nfjbd" path="res://assets/sprites/priff_new-look_1.png" id="6_52h14"]
+[ext_resource type="Texture2D" uid="uid://b1fyf45dfbvrp" path="res://assets/sprites/priff_new_look_4.png" id="1_j4on4"]
+[ext_resource type="Texture2D" uid="uid://8mjbdvn3ygpy" path="res://assets/sprites/priff_new_look_2.png" id="2_vfhwo"]
+[ext_resource type="Texture2D" uid="uid://but0ox774rtay" path="res://assets/sprites/priff_new_look_3.png" id="3_k74yn"]
+[ext_resource type="Texture2D" uid="uid://r6yq8alj5ocs" path="res://assets/sprites/priff_new-look_1.png" id="6_52h14"]
 [ext_resource type="Script" uid="uid://4l2s8w836mhf" path="res://scripts/dash_manager.gd" id="7_qdgp1"]
 [ext_resource type="Script" uid="uid://bi8cd36alxvtx" path="res://scripts/ui_manager.gd" id="8_2i0o8"]
-[ext_resource type="FontFile" uid="uid://ceoyep7e0baws" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_posfk"]
+[ext_resource type="FontFile" uid="uid://b8i13b3yqmoai" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_posfk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5rsy8"]
 atlas = ExtResource("1_j4on4")

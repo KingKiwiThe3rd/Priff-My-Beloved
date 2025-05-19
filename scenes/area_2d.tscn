@@ -1,9 +1,9 @@
 [gd_scene load_steps=40 format=3 uid="uid://nljcjg4c58wi"]
 
 [ext_resource type="Script" uid="uid://dx21r5eqlw3cc" path="res://scripts/area_2d.gd" id="1_fdm6c"]
-[ext_resource type="Texture2D" uid="uid://cfs2yruhgtkgs" path="res://assets/sprites/blueberry_animated-Sheet.png" id="2_elwmc"]
-[ext_resource type="Texture2D" uid="uid://ixljqavdt2kb" path="res://assets/sprites/BLueberry outline.png" id="3_bmsux"]
-[ext_resource type="Texture2D" uid="uid://bo5mwdicvawvp" path="res://assets/sprites/blueberry_reappear-Sheet.png" id="4_8nvme"]
+[ext_resource type="Texture2D" uid="uid://c8or1n8x0eyey" path="res://assets/sprites/blueberry_animated-Sheet.png" id="2_elwmc"]
+[ext_resource type="Texture2D" uid="uid://c41auwvwsrsg6" path="res://assets/sprites/BLueberry outline.png" id="3_bmsux"]
+[ext_resource type="Texture2D" uid="uid://li7vb24vfg5f" path="res://assets/sprites/blueberry_reappear-Sheet.png" id="4_8nvme"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5asha"]
 atlas = ExtResource("2_elwmc")
