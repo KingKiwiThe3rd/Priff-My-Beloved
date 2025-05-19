@@ -28,6 +28,20 @@ var slow_motion_duration = 1.0
 var slow_motion_scale = 0.3  # Slower = lower value (0.3 = 30% normal speed)
 var slow_motion_timer := 0.0
 
+# at top of your CharacterBody2D script:
+
+enum PlayerState { NORMAL, WALL_SLIDE }
+var state = PlayerState.NORMAL
+
+const WALL_SLIDE_SPEED = 50.0
+const WALL_HANG_TIME   = 3.0
+const WALL_JUMP_X      = 300.0  # ↑ increase this to round corners
+const WALL_JUMP_Y      = -250.0 # ↓ decrease (make less negative) to trade vertical
+
+var wall_dir = 0          # +1 if hanging on right wall, -1 on left
+var hang_timer = WALL_HANG_TIME
+
+
 func _ready():
 	dash_manager.player = self  # Link Priff to DashManager
 	
@@ -37,14 +51,46 @@ func _ready():
 		spawn_point = GameManager.checkpoint_position
 
 func _physics_process(delta: float) -> void:
+	# 1) Read input_dir *once*, at the top
+	var input_dir = Input.get_axis("Move Left", "Move Right")
+
+	# 2) Your existing floor‐reset logic…
 	if is_on_floor():
+		state = PlayerState.NORMAL
+		hang_timer = WALL_HANG_TIME
 		JUMP_AMOUNT = 2
 		coyote_timer = COYOTE_TIME
 		dash_manager.air_dashes_used = 0
-		dash_manager.extra_air_dash = false   # ← clear the power‐up here
+		dash_manager.extra_air_dash = false
 	elif coyote_timer > 0:
 		coyote_timer -= delta
-		
+
+	# 3) Now use input_dir inside the state machine
+	match state:
+		PlayerState.NORMAL:
+			if not is_on_floor() and is_on_wall() and input_dir != 0:
+				wall_dir = (1 if input_dir > 0 else -1)
+				state = PlayerState.WALL_SLIDE
+				dash_manager.reset_dash()
+		# else: fall through to normal movement/gravity below
+		PlayerState.WALL_SLIDE:
+			# clamp vertical speed
+			velocity.y = min(velocity.y, WALL_SLIDE_SPEED)
+			velocity.x = 0
+			# on jump, bounce off
+			if Input.is_action_just_pressed("Jump"):
+				velocity.x = -wall_dir * WALL_JUMP_X
+				velocity.y = WALL_JUMP_Y
+				state = PlayerState.NORMAL
+			else:
+				# count down your hang time
+				hang_timer -= delta
+				if hang_timer <= 0:
+					state = PlayerState.NORMAL
+				# slide movement only
+			move_and_slide()
+			return  # skip the rest while in wall‐slide
+			
 	# Jumping
 	if Input.is_action_just_pressed("Jump") and (is_on_floor() or JUMP_AMOUNT > 0 or coyote_timer > 0):
 		velocity.y = JUMP_VELOCITY
