@@ -16,7 +16,7 @@ func _ready():
 	sprite.position = Vector2(screen_size.x/camera_zoom/2, screen_size.y /camera_zoom/2)
 	
 	# Scroll slower than camera
-	motion_scale = Vector2(0.5, 0)
+	motion_scale = Vector2(0.2, 0)
 	
 	# Motion mirroring needs to use the effective width after scaling
 	# Since the sprite is scaled down, we need unscaled mirroring
