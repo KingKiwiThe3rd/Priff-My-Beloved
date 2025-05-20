@@ -4,7 +4,7 @@ extends ParallaxLayer
 
 func _ready():
 	var screen_size = get_viewport().size
-	var camera_zoom = 3.0 # Camera is zoomed 3x
+	var camera_zoom = 3.6 # Camera is zoomed 3x
 	var sprite_scale = 1.0 / camera_zoom # Scale sprite down to compensate
 	var texture_size = sprite.texture.get_size()
 	print(texture_size)
@@ -20,7 +20,7 @@ func _ready():
 	
 	# Motion mirroring needs to use the effective width after scaling
 	# Since the sprite is scaled down, we need unscaled mirroring
-	motion_mirroring = Vector2(texture_size.x/3, 0)
+	motion_mirroring = Vector2(texture_size.x/camera_zoom, 0)
 	
 	sprite.visible = true
 	sprite.modulate = Color(1, 1, 1, 1)

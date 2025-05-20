@@ -112,7 +112,7 @@ func _physics_process(delta: float) -> void:
 	if not dash_manager.is_dashing:
 		var current_accel = ACCELERATION if is_on_floor() else AIR_CONTROL
 		velocity.x = move_toward(velocity.x, direction * MAX_SPEED, current_accel * delta)
-		animated_sprite_2d.flip_h = direction > 0 if direction != 0 else animated_sprite_2d.flip_h
+		animated_sprite_2d.flip_h = direction < 0 if direction != 0 else animated_sprite_2d.flip_h
 		
 	# Play Animations
 	if dash_manager.is_dashing:

@@ -15,9 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://yq1qck1v0qgy" path="res://scenes/checkpoint.tscn" id="11_kvpfn"]
 [ext_resource type="Script" uid="uid://c32lh3n1uqtvo" path="res://scenes/parallax_background.gd" id="14_ir15t"]
 [ext_resource type="Script" uid="uid://dnr7prkodw8w0" path="res://scenes/shittyMountains.gd" id="15_ca42v"]
-[ext_resource type="Texture2D" uid="uid://wldgd1xo6jje" path="res://assets/sprites/shitty_mountains2.png" id="15_ir15t"]
 [ext_resource type="Texture2D" uid="uid://kxwblpsnjxsg" path="res://assets/sprites/simple_sky.png" id="16_ca42v"]
 [ext_resource type="Script" uid="uid://boy8sa4ofhfdb" path="res://scenes/parallax_layer_2.gd" id="17_ssvqc"]
+[ext_resource type="Texture2D" uid="uid://dvbnrxdbq5ga7" path="res://assets/sprites/snowy_mountains.png" id="18_ssvqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5sh4k"]
 texture = ExtResource("3_i75mv")
@@ -374,7 +374,7 @@ script = ExtResource("2_vn441")
 [node name="Camera2D" type="Camera2D" parent="Priff"]
 position = Vector2(-11, -24)
 scale = Vector2(0.4, 0.279999)
-zoom = Vector2(3, 3)
+zoom = Vector2(3.6, 3.6)
 limit_bottom = 160
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
@@ -556,4 +556,4 @@ texture = ExtResource("16_ca42v")
 script = ExtResource("17_ssvqc")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-texture = ExtResource("15_ir15t")
+texture = ExtResource("18_ssvqc")

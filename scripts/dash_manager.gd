@@ -54,7 +54,7 @@ func start_dash():
 	if(priff.is_slow_motion==true):
 		priff.stop_slow_motion()
 	is_dashing = true
-	var dash_direction = -1 if not player.animated_sprite_2d.flip_h else 1
+	var dash_direction = 1 if not player.animated_sprite_2d.flip_h else -1
 	player.velocity.x = dash_direction * DASH_INITIAL_BOOST
 	player.velocity.y = 0
 	dash_timer = DASH_TIME
