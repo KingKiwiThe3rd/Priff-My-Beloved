@@ -32,13 +32,12 @@ enum PlayerState { NORMAL, WALL_SLIDE }
 var state = PlayerState.NORMAL
 
 const WALL_SLIDE_SPEED = 30.0
-const WALL_HANG_TIME   = 3.0
-const WALL_JUMP_X      = 130.0
-const WALL_JUMP_Y      = - 200.0
+const WALL_HANG_DURATION = 2.0   # total budget in seconds
+const WALL_JUMP_X      = 100.0
+const WALL_JUMP_Y      = - 140.0
 
 var wall_dir = 0
-var hang_timer = WALL_HANG_TIME
-
+var wall_hang_timer = WALL_HANG_DURATION
 func _ready():
 	dash_manager.player = self  # Link Priff to DashManager
 	
@@ -54,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	# 2) Your existing floor‐reset logic…
 	if is_on_floor():
 		state = PlayerState.NORMAL
-		hang_timer = WALL_HANG_TIME
+		wall_hang_timer = WALL_HANG_DURATION
 		JUMP_AMOUNT = 2
 		coyote_timer = COYOTE_TIME
 		dash_manager.air_dashes_used = 0
@@ -62,33 +61,31 @@ func _physics_process(delta: float) -> void:
 	elif coyote_timer > 0:
 		coyote_timer -= delta
 		
-	# 3) Now use input_dir inside the state machine
-	match state:
-		PlayerState.NORMAL:
-			if not is_on_floor() and is_on_wall() and input_dir != 0:
-				wall_dir = (1 if input_dir > 0 else -1)
-				state = PlayerState.WALL_SLIDE
-				dash_manager.reset_dash()
-			# else: fall through to normal movement/gravity below
-		PlayerState.WALL_SLIDE:
-			# exit conditions
-			if is_on_floor() or not is_on_wall() or input_dir == 0:
-				state = PlayerState.NORMAL
-			# force slow downward slide
+# — Wall-slide state machine —
+	if state == PlayerState.NORMAL:
+	# Try to enter wall-slide if you still have time
+		if not is_on_floor() and is_on_wall() and input_dir != 0 and wall_hang_timer > 0:
+			state      = PlayerState.WALL_SLIDE
+			wall_dir = 1 if input_dir > 0 else -1
+			dash_manager.reset_dash()    # give back your dash once
+	elif state == PlayerState.WALL_SLIDE:
+		# Exit if you land, leave the wall, release input, or run out of time
+		if is_on_floor() or not is_on_wall() or input_dir == 0 or wall_hang_timer <= 0:
+			state = PlayerState.NORMAL
+		else:
+			# Consume your hang budget
+			wall_hang_timer -= delta
+			# Clamp to a slow slide
 			velocity.y = WALL_SLIDE_SPEED
 			velocity.x = 0
-			# bounce if jump
+			# Wall jump
 			if Input.is_action_just_pressed("Jump"):
 				velocity.x = -wall_dir * WALL_JUMP_X
 				velocity.y = WALL_JUMP_Y
 				state = PlayerState.NORMAL
-			else:
-				hang_timer -= delta
-				if hang_timer <= 0:
-					state = PlayerState.NORMAL
 			move_and_slide()
-			return  # skip normal physics while sliding
-			
+			return   # skip all other physics while sliding
+
 	# Jumping
 	if Input.is_action_just_pressed("Jump") and (is_on_floor() or JUMP_AMOUNT > 0 or coyote_timer > 0):
 		velocity.y = JUMP_VELOCITY
@@ -123,7 +120,7 @@ func _physics_process(delta: float) -> void:
 		else: 
 			animated_sprite_2d.play("run")
 	else:
-		if velocity.y < 0:
+		if velocity.y < 25:
 			animated_sprite_2d.play("jump")
 		else:
 			animated_sprite_2d.play("falling")
