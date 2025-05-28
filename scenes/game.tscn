@@ -1,5 +1,6 @@
-[gd_scene load_steps=28 format=3 uid="uid://borctkti25q41"]
+[gd_scene load_steps=30 format=3 uid="uid://borctkti25q41"]
 
+[ext_resource type="Script" uid="uid://dy8wxd8afqldj" path="res://scenes/room_1.gd" id="1_264po"]
 [ext_resource type="PackedScene" uid="uid://bowmp2irv84q6" path="res://scenes/priff.tscn" id="1_pqc4m"]
 [ext_resource type="Script" uid="uid://cl888tpmf610n" path="res://scripts/priff.gd" id="2_vn441"]
 [ext_resource type="Texture2D" uid="uid://clpx4sr170olx" path="res://assets/sprites/world_tileset.png" id="3_5h83q"]
@@ -18,6 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://kxwblpsnjxsg" path="res://assets/sprites/simple_sky.png" id="16_ca42v"]
 [ext_resource type="Script" uid="uid://boy8sa4ofhfdb" path="res://scripts/parallax_layer_2.gd" id="17_ssvqc"]
 [ext_resource type="Texture2D" uid="uid://dvbnrxdbq5ga7" path="res://assets/sprites/snowy_mountains.png" id="18_ssvqc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1kice"]
+size = Vector2(800, 600)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5sh4k"]
 texture = ExtResource("3_i75mv")
@@ -365,6 +369,22 @@ _data = {
 
 [node name="Game" type="Node2D"]
 
+[node name="room1" type="Area2D" parent="."]
+position = Vector2(-200, 40)
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_264po")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="room1"]
+shape = SubResource("RectangleShape2D_1kice")
+
+[node name="CameraAnchor1" type="Marker2D" parent="room1"]
+position = Vector2(130, 25)
+scale = Vector2(0.993459, 1)
+
+[node name="CameraAnchor2" type="Marker2D" parent="room1"]
+position = Vector2(-130, 25)
+
 [node name="Priff" parent="." instance=ExtResource("1_pqc4m")]
 z_index = 10
 position = Vector2(53, 91)
@@ -376,13 +396,11 @@ position = Vector2(-11, -24)
 scale = Vector2(0.4, 0.279999)
 zoom = Vector2(3.6, 3.6)
 limit_bottom = 160
-position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_top_margin = 0.3
 drag_bottom_margin = 0.3
 script = ExtResource("3_kvuet")
-vertical_offset_ratio = 0.0
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-5, 0)
@@ -405,33 +423,43 @@ shape = SubResource("WorldBoundaryShape2D_nb87n")
 
 [node name="coin" parent="coins" instance=ExtResource("5_awnxt")]
 position = Vector2(791, -89)
+collision_mask = 1
 
 [node name="coin2" parent="coins" instance=ExtResource("5_awnxt")]
 position = Vector2(228, 46)
+collision_mask = 1
 
 [node name="coin3" parent="coins" instance=ExtResource("5_awnxt")]
 position = Vector2(689, -22)
+collision_mask = 1
 
 [node name="coin4" parent="coins" instance=ExtResource("5_awnxt")]
 position = Vector2(400, -267)
+collision_mask = 1
 
 [node name="coin5" parent="coins" instance=ExtResource("5_awnxt")]
 position = Vector2(422, -267)
+collision_mask = 1
 
 [node name="coin6" parent="coins" instance=ExtResource("5_awnxt")]
 position = Vector2(385, -247)
+collision_mask = 1
 
 [node name="coin7" parent="coins" instance=ExtResource("5_awnxt")]
 position = Vector2(441, -267)
+collision_mask = 1
 
 [node name="coin8" parent="coins" instance=ExtResource("5_awnxt")]
 position = Vector2(453, -247)
+collision_mask = 1
 
 [node name="coin9" parent="coins" instance=ExtResource("5_awnxt")]
 position = Vector2(453, -234)
+collision_mask = 1
 
 [node name="coin10" parent="coins" instance=ExtResource("5_awnxt")]
 position = Vector2(428, -334)
+collision_mask = 1
 
 [node name="slimes" type="Node" parent="."]
 

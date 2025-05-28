@@ -1,13 +1,31 @@
-[gd_scene load_steps=21 format=3 uid="uid://bowmp2irv84q6"]
+[gd_scene load_steps=27 format=3 uid="uid://bowmp2irv84q6"]
 
 [ext_resource type="Texture2D" uid="uid://dvuwwlppug2po" path="res://assets/sprites/NewPriff_dash.png" id="1_k74yn"]
 [ext_resource type="Texture2D" uid="uid://bq0h6q6b83bo2" path="res://assets/sprites/NewPriff_fall.png" id="2_5rsy8"]
+[ext_resource type="Texture2D" uid="uid://dxrg8fg8tu7bu" path="res://assets/sprites/NewPriff_fallFollowT.png" id="3_52h14"]
 [ext_resource type="Texture2D" uid="uid://dlwtejygskbt7" path="res://assets/sprites/NewPriff_idle.png" id="3_vfhwo"]
 [ext_resource type="Texture2D" uid="uid://b8rc3h5o4oevw" path="res://assets/sprites/NewPriff_jump.png" id="4_52h14"]
 [ext_resource type="Texture2D" uid="uid://dglq3vp8qi671" path="res://assets/sprites/NewPriff_run.png" id="5_5drvw"]
+[ext_resource type="Texture2D" uid="uid://d3s40dpxha18e" path="res://assets/sprites/NewPriff_jumpAntic.png" id="6_5drvw"]
 [ext_resource type="Script" uid="uid://4l2s8w836mhf" path="res://scripts/dash_manager.gd" id="7_qdgp1"]
 [ext_resource type="Script" uid="uid://bi8cd36alxvtx" path="res://scripts/ui_manager.gd" id="8_2i0o8"]
 [ext_resource type="FontFile" uid="uid://chkxvd7018x7h" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_posfk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfhwo"]
+atlas = ExtResource("3_52h14")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52h14"]
+atlas = ExtResource("3_52h14")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5drvw"]
+atlas = ExtResource("3_52h14")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwmkg"]
+atlas = ExtResource("3_52h14")
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vu2oc"]
 atlas = ExtResource("3_vfhwo")
@@ -69,6 +87,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vfhwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52h14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5drvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwmkg")
+}],
+"loop": true,
+"name": &"fallingFollowThrough",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vu2oc")
 }, {
 "duration": 1.0,
@@ -84,6 +119,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_5drvw")
+}],
+"loop": true,
+"name": &"jumpAnticipation",
 "speed": 5.0
 }, {
 "frames": [{
@@ -126,8 +169,9 @@ collision_layer = 2
 position = Vector2(0, -8)
 scale = Vector2(0.5, 0.525)
 sprite_frames = SubResource("SpriteFrames_koho6")
-animation = &"run"
+animation = &"fallingFollowThrough"
 autoplay = "idle"
+frame_progress = 0.0611911
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7.5)

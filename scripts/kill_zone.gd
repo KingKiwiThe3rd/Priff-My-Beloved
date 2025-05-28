@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	print("you died")
+	print("you died from killzone")
 	Engine.time_scale = 0.25  # Slow down the game time during death
 	body.get_node("CollisionShape2D").queue_free()  # Free the collider if needed
 	timer.start()  # Start any timer for respawn or other purposes

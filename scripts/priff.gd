@@ -1,56 +1,64 @@
-# Player Script (CharacterBody2D)
 extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var dash_manager = $DashManager  # Reference the DashManager
+@onready var dash_manager = $DashManager
 @onready var TSlow_overlay = get_node("../CanvasLayer/TSlowOverlay")
 var spawn_point : Vector2
 
-var JUMP_AMOUNT = 2  # Number of jumps allowed (reset on ground)
+var is_preparing_jump = false
+var is_landing = false
+var jump_prepare_timer = 0.0
+const JUMP_PREPARE_DURATION = 0.05
+const LAND_DURATION = 0.2
+
+var landing_timer = 0.0
+
+var JUMP_AMOUNT = 2
 const JUMP_VELOCITY = -175.0
 const JUMP_CUT_MULTIPLIER = 0.3
 const GRAVITY = 400.0
 const MAX_FALL_SPEED = 700.0
 
-# Movement Variables
-const MAX_SPEED = 80.0  
+const MAX_SPEED = 80.0
 const ACCELERATION = 300.0
 const DECELERATION = 400.0
 const AIR_CONTROL = 200.0
 
-# Coyote Time Variables
 const COYOTE_TIME = 0.1
 var coyote_timer = 0.0
-var was_on_floor = false  
+var was_on_floor = false
 
 var is_slow_motion = false
 var slow_motion_duration = 1.0
-var slow_motion_scale = 0.3  # Slower = lower value (0.3 = 30% normal speed)
+var slow_motion_scale = 0.3
 var slow_motion_timer := 0.0
 
 enum PlayerState { NORMAL, WALL_SLIDE }
 var state = PlayerState.NORMAL
 
 const WALL_SLIDE_SPEED = 30.0
-const WALL_HANG_DURATION = 2.0   # total budget in seconds
-const WALL_JUMP_X      = 100.0
-const WALL_JUMP_Y      = - 140.0
+const WALL_HANG_DURATION = 2.0
+const WALL_JUMP_X = 100.0
+const WALL_JUMP_Y = -140.0
 
 var wall_dir = 0
 var wall_hang_timer = WALL_HANG_DURATION
+
 func _ready():
-	dash_manager.player = self  # Link Priff to DashManager
-	
-	# If there is a saved checkpoint, spawn at it
-	if GameManager.checkpoint_position != Vector2.ZERO:
-		global_position = GameManager.checkpoint_position
-		spawn_point = GameManager.checkpoint_position
+	add_to_group("player")
+	# Force reset checkpoint if invalid
+	if GameManager.checkpoint_position == Vector2.ZERO:
+		GameManager.checkpoint_position = Vector2(91, 53)
+	print("GameManager.checkpoint_position: ", GameManager.checkpoint_position)
+	global_position = GameManager.checkpoint_position
+	spawn_point = GameManager.checkpoint_position
+	global_position = global_position.round()
+	print("Player initialized at: ", global_position, " in group 'player': ", is_in_group("player"))
+	dash_manager.player = self
 
 func _physics_process(delta: float) -> void:
-	# 1) Read input_dir *once*, at the top
 	var input_dir = Input.get_axis("Move Left", "Move Right")
 
-	# 2) Your existing floor‐reset logic…
 	if is_on_floor():
 		state = PlayerState.NORMAL
 		wall_hang_timer = WALL_HANG_DURATION
@@ -60,64 +68,90 @@ func _physics_process(delta: float) -> void:
 		dash_manager.extra_air_dash = false
 	elif coyote_timer > 0:
 		coyote_timer -= delta
-		
-# — Wall-slide state machine —
+	
 	if state == PlayerState.NORMAL:
-	# Try to enter wall-slide if you still have time
-		if not is_on_floor() and is_on_wall() and input_dir != 0 and wall_hang_timer > 0:
-			state      = PlayerState.WALL_SLIDE
+		if not is_on_floor() and is_on_wall_only() and input_dir != 0 and wall_hang_timer > 0:
+			state = PlayerState.WALL_SLIDE
 			wall_dir = 1 if input_dir > 0 else -1
-			dash_manager.reset_dash()    # give back your dash once
+			dash_manager.reset_dash()
 	elif state == PlayerState.WALL_SLIDE:
-		# Exit if you land, leave the wall, release input, or run out of time
-		if is_on_floor() or not is_on_wall() or input_dir == 0 or wall_hang_timer <= 0:
+		if is_on_floor() or not is_on_wall_only() or input_dir == 0 or wall_hang_timer <= 0:
 			state = PlayerState.NORMAL
 		else:
-			# Consume your hang budget
 			wall_hang_timer -= delta
-			# Clamp to a slow slide
 			velocity.y = WALL_SLIDE_SPEED
 			velocity.x = 0
-			# Wall jump
 			if Input.is_action_just_pressed("Jump"):
 				velocity.x = -wall_dir * WALL_JUMP_X
 				velocity.y = WALL_JUMP_Y
 				state = PlayerState.NORMAL
+				is_landing = false
+				landing_timer = 0.0
+			animated_sprite_2d.play("wall_slide")
 			move_and_slide()
-			return   # skip all other physics while sliding
+			return
 
-	# Jumping
-	if Input.is_action_just_pressed("Jump") and (is_on_floor() or JUMP_AMOUNT > 0 or coyote_timer > 0):
-		velocity.y = JUMP_VELOCITY
-		JUMP_AMOUNT -= 1  # Use a jump
-		coyote_timer = 0  
-		
-	if Input.is_action_just_released("Jump") and velocity.y < 0:
+	if Input.is_action_just_pressed("Jump") and (is_on_floor() or JUMP_AMOUNT > 0 or coyote_timer > 0) and not dash_manager.is_dashing and not is_preparing_jump:
+		is_preparing_jump = true
+		jump_prepare_timer = JUMP_PREPARE_DURATION
+		animated_sprite_2d.play("jumpAnticipation")
+		is_landing = false
+		landing_timer = 0.0
+	
+	if is_preparing_jump:
+		jump_prepare_timer -= delta
+		if jump_prepare_timer <= 0:
+			is_preparing_jump = false
+			if (is_on_floor() or JUMP_AMOUNT > 0 or coyote_timer > 0) and not dash_manager.is_dashing:
+				velocity.y = JUMP_VELOCITY
+				JUMP_AMOUNT -= 1
+				coyote_timer = 0
+	
+	var just_landed = is_on_floor() and not was_on_floor and velocity.y >= 0
+	if just_landed and not dash_manager.is_dashing and not is_preparing_jump:
+		is_landing = true
+		landing_timer = LAND_DURATION
+		animated_sprite_2d.play("fallingFollowThrough")
+	
+	if is_landing:
+		landing_timer -= delta
+		if landing_timer <= 0:
+			is_landing = false
+	
+	if not is_on_floor() and is_landing:
+		is_landing = false
+		landing_timer = 0.0
+	
+	was_on_floor = is_on_floor()
+	
+	if Input.is_action_just_released("Jump") and velocity.y < 0 and not dash_manager.is_dashing:
 		velocity.y *= JUMP_CUT_MULTIPLIER
-		
-	# Handle Dashing
+	
 	if Input.is_action_just_pressed("Dash"):
 		dash_manager.try_dash()
  
-	# Apply Gravity
 	if not dash_manager.is_dashing:
 		velocity.y += GRAVITY * delta
-		velocity.y = min(velocity.y, MAX_FALL_SPEED)  
-		
-	# Movement
+		velocity.y = min(velocity.y, MAX_FALL_SPEED)
+	
 	var direction := Input.get_axis("Move Left", "Move Right")
 	if not dash_manager.is_dashing:
 		var current_accel = ACCELERATION if is_on_floor() else AIR_CONTROL
 		velocity.x = move_toward(velocity.x, direction * MAX_SPEED, current_accel * delta)
 		animated_sprite_2d.flip_h = direction < 0 if direction != 0 else animated_sprite_2d.flip_h
-		
-	# Play Animations
+	
 	if dash_manager.is_dashing:
 		animated_sprite_2d.play("dash")
+	elif is_preparing_jump:
+		pass
+	elif state == PlayerState.WALL_SLIDE:
+		animated_sprite_2d.play("wall_slide")
+	elif is_landing:
+		animated_sprite_2d.play("fallingFollowThrough")
 	elif is_on_floor():
 		if direction == 0:
 			animated_sprite_2d.play("idle")
-		else: 
+		else:
 			animated_sprite_2d.play("run")
 	else:
 		if velocity.y < 25:
@@ -126,7 +160,9 @@ func _physics_process(delta: float) -> void:
 			animated_sprite_2d.play("falling")
 	
 	move_and_slide()
-	
+	# Ensure pixel-perfect position after movement
+	global_position = global_position.round()
+
 func set_spawn_point(new_spawn_point: Vector2):
 	print("Priff has gotten the coin")
 	spawn_point = new_spawn_point
@@ -134,7 +170,13 @@ func set_spawn_point(new_spawn_point: Vector2):
 func die_and_respawn():
 	global_position = spawn_point
 	velocity = Vector2.ZERO
-	
+	global_position = global_position.round()
+	print("Player respawned at: ", global_position)
+	var areas = get_tree().get_nodes_in_group("room")
+	for area in areas:
+		if area is Area2D and area.has_method("check_player_inside"):
+			area.check_player_inside()
+						
 func _process(delta):
 	if Input.is_action_just_pressed("time_slow") and not is_slow_motion:
 		start_slow_motion()
@@ -148,9 +190,9 @@ func start_slow_motion():
 	Engine.time_scale = slow_motion_scale
 	slow_motion_timer = slow_motion_duration
 	is_slow_motion = true
-	TSlow_overlay.visible=true
+	TSlow_overlay.visible = true
 
 func stop_slow_motion():
 	Engine.time_scale = 1.0
 	is_slow_motion = false
-	TSlow_overlay.visible=false
+	TSlow_overlay.visible = false
