@@ -14,14 +14,14 @@ const LAND_DURATION = 0.2
 var landing_timer = 0.0
 
 var JUMP_AMOUNT = 2
-const JUMP_VELOCITY = -175.0
+const JUMP_VELOCITY = -120.0
 const JUMP_CUT_MULTIPLIER = 0.3
-const GRAVITY = 400.0
+const GRAVITY = 300.0
 const MAX_FALL_SPEED = 700.0
 
-const MAX_SPEED = 80.0
-const ACCELERATION = 300.0
-const DECELERATION = 400.0
+const MAX_SPEED = 60.0
+const ACCELERATION = 400.0
+const DECELERATION = 500.0
 const AIR_CONTROL = 200.0
 
 const COYOTE_TIME = 0.1
@@ -38,9 +38,9 @@ enum PlayerState { NORMAL, WALL_SLIDE }
 var state = PlayerState.NORMAL
 
 const WALL_SLIDE_SPEED = 30.0
-const WALL_HANG_DURATION = 2.0
-const WALL_JUMP_X = 100.0
-const WALL_JUMP_Y = -140.0
+const WALL_HANG_DURATION = 3.0
+const WALL_JUMP_X = 40.0
+const WALL_JUMP_Y = -120.0
 
 var wall_dir = 0
 var wall_hang_timer = WALL_HANG_DURATION
@@ -53,7 +53,6 @@ func _ready():
 	print("GameManager.checkpoint_position: ", GameManager.checkpoint_position)
 	global_position = GameManager.checkpoint_position
 	spawn_point = GameManager.checkpoint_position
-	global_position = global_position.round()
 	print("Player initialized at: ", global_position, " in group 'player': ", is_in_group("player"))
 	dash_manager.player = self
 
@@ -98,10 +97,12 @@ func _physics_process(delta: float) -> void:
 				return  # skip the normal physics/gravity/jump below
 
 	# gravity & quick‐fall (only here)
+	# gravity & quick-fall (only here)
 	if not dash_manager.is_dashing and not is_on_floor():
-		var fall_mult = FAST_FALL_MULTIPLIER if Input.is_action_pressed("fast_fall") and velocity.y > 0 else 1.0
-		velocity.y += GRAVITY * fall_mult * delta
-		velocity.y = min(velocity.y, MAX_FALL_SPEED)# then your movement x‐axis, animations…
+		# replace "fast_fall" with your actual InputMap action name
+		var fall_mult = (FAST_FALL_MULTIPLIER if Input.is_action_pressed("Fast fall") and velocity.y > 0 else 1.0)
+		velocity.y += GRAVITY * fall_mult * delta*0.9
+		velocity.y = min(velocity.y, MAX_FALL_SPEED)
 	move_and_slide()
 
 	if Input.is_action_just_pressed("Jump") and (is_on_floor() or JUMP_AMOUNT > 0 or coyote_timer > 0) and not dash_manager.is_dashing and not is_preparing_jump:
@@ -142,10 +143,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Dash"):
 		dash_manager.try_dash()
- 
-	if not dash_manager.is_dashing:
-		velocity.y += GRAVITY * delta
-		velocity.y = min(velocity.y, MAX_FALL_SPEED)
+
 	
 	var direction := Input.get_axis("Move Left", "Move Right")
 	if not dash_manager.is_dashing:
@@ -182,7 +180,6 @@ func set_spawn_point(new_spawn_point: Vector2):
 func die_and_respawn():
 	global_position = spawn_point
 	velocity = Vector2.ZERO
-	global_position = global_position.round()
 	print("Player respawned at: ", global_position)
 	var areas = get_tree().get_nodes_in_group("room")
 	for area in areas:

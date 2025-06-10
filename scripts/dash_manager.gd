@@ -2,8 +2,8 @@
 extends Node
 
 var player: CharacterBody2D
-const DASH_INITIAL_BOOST = 420.0
-const DASH_DECAY = 1750.0
+const DASH_INITIAL_BOOST = 360.0
+const DASH_DECAY = 1500.0
 const DASH_TIME = 0.2
 const DASH_COOLDOWN = 0.45
 
