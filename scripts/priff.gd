@@ -27,6 +27,7 @@ const AIR_CONTROL = 200.0
 const COYOTE_TIME = 0.1
 var coyote_timer = 0.0
 var was_on_floor = false
+const FAST_FALL_MULTIPLIER = 2.0  # 2× normal gravity when holding down
 
 var is_slow_motion = false
 var slow_motion_duration = 1.0
@@ -59,6 +60,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_axis("Move Left", "Move Right")
 
+	# Reset on floor
 	if is_on_floor():
 		state = PlayerState.NORMAL
 		wall_hang_timer = WALL_HANG_DURATION
@@ -68,28 +70,39 @@ func _physics_process(delta: float) -> void:
 		dash_manager.extra_air_dash = false
 	elif coyote_timer > 0:
 		coyote_timer -= delta
-	
-	if state == PlayerState.NORMAL:
-		if not is_on_floor() and is_on_wall_only() and input_dir != 0 and wall_hang_timer > 0:
-			state = PlayerState.WALL_SLIDE
-			wall_dir = 1 if input_dir > 0 else -1
-			dash_manager.reset_dash()
-	elif state == PlayerState.WALL_SLIDE:
-		if is_on_floor() or not is_on_wall_only() or input_dir == 0 or wall_hang_timer <= 0:
-			state = PlayerState.NORMAL
-		else:
-			wall_hang_timer -= delta
-			velocity.y = WALL_SLIDE_SPEED
-			velocity.x = 0
-			if Input.is_action_just_pressed("Jump"):
-				velocity.x = -wall_dir * WALL_JUMP_X
-				velocity.y = WALL_JUMP_Y
+
+	# State‐machine
+	match state:
+		PlayerState.NORMAL:
+			if not is_on_floor() and is_on_wall() and input_dir != 0 and wall_hang_timer > 0:
+				wall_dir = 1 if input_dir > 0 else -1
+				state = PlayerState.WALL_SLIDE
+				dash_manager.reset_dash()
+				print("⛰️ Entered WALL_SLIDE")
+		PlayerState.WALL_SLIDE:
+			# EXIT check
+			if is_on_floor() or not is_on_wall() or input_dir == 0 or wall_hang_timer <= 0:
 				state = PlayerState.NORMAL
-				is_landing = false
-				landing_timer = 0.0
-			animated_sprite_2d.play("wall_slide")
-			move_and_slide()
-			return
+			else:
+				# only slide & bounce when you truly stay in WALL_SLIDE
+				wall_hang_timer -= delta
+				velocity.y = WALL_SLIDE_SPEED
+				if Input.is_action_just_pressed("Jump"):
+					velocity.x = -wall_dir * WALL_JUMP_X
+					velocity.y = WALL_JUMP_Y
+					state = PlayerState.NORMAL
+				else:
+					print("⛰️ Sliding, time left=", wall_hang_timer)
+					animated_sprite_2d.play("wall_slide")
+				move_and_slide()
+				return  # skip the normal physics/gravity/jump below
+
+	# gravity & quick‐fall (only here)
+	if not dash_manager.is_dashing and not is_on_floor():
+		var fall_mult = FAST_FALL_MULTIPLIER if Input.is_action_pressed("fast_fall") and velocity.y > 0 else 1.0
+		velocity.y += GRAVITY * fall_mult * delta
+		velocity.y = min(velocity.y, MAX_FALL_SPEED)# then your movement x‐axis, animations…
+	move_and_slide()
 
 	if Input.is_action_just_pressed("Jump") and (is_on_floor() or JUMP_AMOUNT > 0 or coyote_timer > 0) and not dash_manager.is_dashing and not is_preparing_jump:
 		is_preparing_jump = true
@@ -161,7 +174,6 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	# Ensure pixel-perfect position after movement
-	global_position = global_position.round()
 
 func set_spawn_point(new_spawn_point: Vector2):
 	print("Priff has gotten the coin")
