@@ -2,8 +2,8 @@
 extends Node
 
 var player: CharacterBody2D
-const DASH_INITIAL_BOOST = 360.0
-const DASH_DECAY = 1500.0
+const DASH_INITIAL_BOOST = 340.0
+const DASH_DECAY = 1400.0
 const DASH_TIME = 0.2
 const DASH_COOLDOWN = 0.45
 
@@ -40,7 +40,7 @@ func try_dash():
 	# Calculate maximum allowed air dashes
 	var max_air_dashes = 1
 	if extra_air_dash:
-		max_air_dashes = 2
+		max_air_dashes = 3
 		
 	# Check if we can dash
 	if player.is_on_floor() or air_dashes_used < max_air_dashes:
