@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bl7seeri7bbgm"]
 
-[ext_resource type="Texture2D" uid="uid://ddxcaju87n3lc" path="res://assets/sprites/slime_green.png" id="1_g7vjp"]
+[ext_resource type="Texture2D" uid="uid://dr0yqlc4g0gxg" path="res://assets/sprites/slime_green.png" id="1_g7vjp"]
 [ext_resource type="Script" uid="uid://b2177prbbj54d" path="res://scripts/slime.gd" id="1_vh8jn"]
 [ext_resource type="PackedScene" uid="uid://xxt3xkunx0u3" path="res://scenes/kill_zone.tscn" id="2_4i345"]
 
@@ -54,7 +54,6 @@ autoplay = "default"
 
 [node name="KillZone" parent="." instance=ExtResource("2_4i345")]
 position = Vector2(0, -5)
-collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 position = Vector2(0, 5.5)
