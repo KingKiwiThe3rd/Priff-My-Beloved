@@ -1,27 +1,27 @@
 extends TileMap
 
 # TileSet source ID (adjust based on your TileSet configuration)
-var source_id: int = 0
+var source_id: int = 3
 
 # Atlas coordinates for different tile configurations (modify based on your tileset)
 # Using a 4-bit bitmask: 1=North, 2=East, 4=South, 8=West
 var tile_configs: Dictionary = {
-	0: Vector2i(3, 3),  # No neighbors
+	0: Vector2i(2, 2),  # No neighbors
 	1: Vector2i(3, 1),  # North
 	2: Vector2i(0, 1),  # East
 	3: Vector2i(3, 0),  # North + East
-	4: Vector2i(0, 1),  # South
-	5: Vector2i(1, 1),  # North + South
-	6: Vector2i(2, 1),  # East + South
-	7: Vector2i(3, 1),  # North + East + South
-	8: Vector2i(0, 2),  # West
-	9: Vector2i(1, 2),  # North + West
-	10: Vector2i(2, 2), # East + West
-	11: Vector2i(3, 2), # North + East + West
-	12: Vector2i(0, 3), # South + West
+	4: Vector2i(2, 1),  # South
+	5: Vector2i(1, 2),  # North + South
+	6: Vector2i(0, 0),  # East + South
+	7: Vector2i(3, 3),  # North + East + South
+	8: Vector2i(1, 1),  # West
+	9: Vector2i(2, 0),  # North + West
+	10: Vector2i(0, 2), # East + West
+	11: Vector2i(2, 3), # North + East + West
+	12: Vector2i(1, 0), # South + West
 	13: Vector2i(1, 3), # North + South + West
-	14: Vector2i(2, 3), # East + South + West
-	15: Vector2i(3, 3)  # All neighbors
+	14: Vector2i(0, 3), # East + South + West
+	15: Vector2i(3, 2)  # All neighbors
 }
 
 func _ready() -> void:

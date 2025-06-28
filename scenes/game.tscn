@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://xxt3xkunx0u3" path="res://scenes/kill_zone.tscn" id="6_tg8no"]
 [ext_resource type="Texture2D" uid="uid://dboh0mfnw8i02" path="res://assets/sprites/4GrapPixels.png" id="8_1kice"]
 [ext_resource type="Texture2D" uid="uid://utbpkjdiuw50" path="res://assets/sprites/templateSpritesheet.png" id="8_37s47"]
-[ext_resource type="Texture2D" uid="uid://bnjrwic8w3h1x" path="res://assets/sprites/4GrapPixels.png" id="8_1kice"]
 [ext_resource type="PackedScene" uid="uid://nljcjg4c58wi" path="res://scenes/area_2d.tscn" id="9_l3ayf"]
 [ext_resource type="Script" uid="uid://gsvxyjvn3u5g" path="res://scenes/tile_map.gd" id="10_bt5mj"]
 [ext_resource type="FontFile" uid="uid://chkxvd7018x7h" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="11_k52hj"]
