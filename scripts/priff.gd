@@ -3,7 +3,12 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash_manager = $DashManager
 @onready var TSlow_overlay = get_node("../CanvasLayer/TSlowOverlay")
+@onready var tile_map: TileMap = $"../TileMap"
+const HAZARD_TILE_IDS = [4]  # the Tile ID(s) you marked as “hazard” in your TileSet
 var spawn_point : Vector2
+
+const HAZARD_LAYER_BIT = 1 << 2  # if “Hazard” is layer 2 (zero-based bit 1)
+
 
 var is_preparing_jump = false
 var is_landing = false
@@ -19,7 +24,7 @@ const JUMP_CUT_MULTIPLIER = 0.3
 const GRAVITY = 300.0
 const MAX_FALL_SPEED = 700.0
 
-const MAX_SPEED = 60.0
+const MAX_SPEED = 50.0
 const ACCELERATION = 400.0
 const DECELERATION = 500.0
 const AIR_CONTROL = 200.0
@@ -171,7 +176,7 @@ func _physics_process(delta: float) -> void:
 			animated_sprite_2d.play("falling")
 	
 	move_and_slide()
-	# Ensure pixel-perfect position after movement
+
 
 func set_spawn_point(new_spawn_point: Vector2):
 	print("Priff has gotten the coin")
@@ -186,6 +191,7 @@ func die_and_respawn():
 		if area is Area2D and area.has_method("check_player_inside"):
 			area.check_player_inside()
 						
+
 func _process(delta):
 	if Input.is_action_just_pressed("time_slow") and not is_slow_motion:
 		start_slow_motion()

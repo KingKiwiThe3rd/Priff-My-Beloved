@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://qcob8sd6dwbd"]
+[gd_scene load_steps=4 format=3 uid="uid://qcob8sd6dwbd"]
 
-[ext_resource type="Texture2D" uid="uid://c0spnwgeuyb6r" path="res://assets/sprites/platforms.png" id="1_vt1tk"]
+[ext_resource type="Texture2D" uid="uid://biwn746b7toud" path="res://assets/sprites/platforms.png" id="1_vt1tk"]
+
+[sub_resource type="GDScript" id="GDScript_28bal"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vmlmp"]
 size = Vector2(32, 8)
 
 [node name="gplatform" type="AnimatableBody2D"]
+script = SubResource("GDScript_28bal")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vmlmp")

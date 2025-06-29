@@ -1,15 +1,15 @@
 [gd_scene load_steps=27 format=3 uid="uid://bowmp2irv84q6"]
 
-[ext_resource type="Texture2D" uid="uid://dvuwwlppug2po" path="res://assets/sprites/NewPriff_dash.png" id="1_k74yn"]
-[ext_resource type="Texture2D" uid="uid://bq0h6q6b83bo2" path="res://assets/sprites/NewPriff_fall.png" id="2_5rsy8"]
-[ext_resource type="Texture2D" uid="uid://dxrg8fg8tu7bu" path="res://assets/sprites/NewPriff_fallFollowT.png" id="3_52h14"]
-[ext_resource type="Texture2D" uid="uid://dlwtejygskbt7" path="res://assets/sprites/NewPriff_idle.png" id="3_vfhwo"]
-[ext_resource type="Texture2D" uid="uid://b8rc3h5o4oevw" path="res://assets/sprites/NewPriff_jump.png" id="4_52h14"]
-[ext_resource type="Texture2D" uid="uid://dglq3vp8qi671" path="res://assets/sprites/NewPriff_run.png" id="5_5drvw"]
-[ext_resource type="Texture2D" uid="uid://d3s40dpxha18e" path="res://assets/sprites/NewPriff_jumpAntic.png" id="6_5drvw"]
+[ext_resource type="Texture2D" uid="uid://deixy7wtuwmc7" path="res://assets/sprites/NewPriff_dash.png" id="1_k74yn"]
+[ext_resource type="Texture2D" uid="uid://c7jqg8nmrq7fs" path="res://assets/sprites/NewPriff_fall.png" id="2_5rsy8"]
+[ext_resource type="Texture2D" uid="uid://b28cp1mgg3kxx" path="res://assets/sprites/NewPriff_fallFollowT.png" id="3_52h14"]
+[ext_resource type="Texture2D" uid="uid://g58mwn2vqg1x" path="res://assets/sprites/NewPriff_idle.png" id="3_vfhwo"]
+[ext_resource type="Texture2D" uid="uid://dnw7sabgae7ae" path="res://assets/sprites/NewPriff_jump.png" id="4_52h14"]
+[ext_resource type="Texture2D" uid="uid://ccdgsfvavjqa8" path="res://assets/sprites/NewPriff_run.png" id="5_5drvw"]
+[ext_resource type="Texture2D" uid="uid://dsbf7fjqa5c7m" path="res://assets/sprites/NewPriff_jumpAntic.png" id="6_5drvw"]
 [ext_resource type="Script" uid="uid://4l2s8w836mhf" path="res://scripts/dash_manager.gd" id="7_qdgp1"]
 [ext_resource type="Script" uid="uid://bi8cd36alxvtx" path="res://scripts/ui_manager.gd" id="8_2i0o8"]
-[ext_resource type="FontFile" uid="uid://chkxvd7018x7h" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_posfk"]
+[ext_resource type="FontFile" uid="uid://b8i13b3yqmoai" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_posfk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vfhwo"]
 atlas = ExtResource("3_52h14")
@@ -164,6 +164,7 @@ size = Vector2(6, 7)
 
 [node name="Priff" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)

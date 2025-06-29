@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfm5ymtjvp8wm"]
+
+[ext_resource type="Texture2D" uid="uid://dfnxdpwkv5hwn" path="res://assets/sprites/spikesPlaceholder.png" id="1_7k7bx"]
+[ext_resource type="PackedScene" uid="uid://xxt3xkunx0u3" path="res://scenes/kill_zone.tscn" id="2_tggh8"]
+
+[node name="Spike" type="Polygon2D"]
+polygon = PackedVector2Array(0, 0, 2, -3, 4, 4, -4, 4, -2, -3)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7k7bx")
+
+[node name="KillZone" parent="." instance=ExtResource("2_tggh8")]
+position = Vector2(-1, 1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KillZone"]
+polygon = PackedVector2Array(-3, 3, 0, -4, 1, 0, 3, -4, 5, -1, 5, 3)
