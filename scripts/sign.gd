@@ -1,37 +1,18 @@
 extends Area2D
 
-@export var message : String = "Hello, world!"
+@onready var interaction_area: InteractionArea = $InteractionArea
+@onready var collision_shape_2d: CollisionShape2D = $InteractionArea/CollisionShape2D
 
-var player_near := false
-
-# Cache exactly the nodes you refer to below:
-@onready var prompt      : Label          = get_node("/root/Game/UI/PromptLabel")
-@onready var dialog      : PanelContainer = get_node("/root/Game/UI/SignDialog")
-@onready var dialog_text : Label          = get_node("/root/Game/UI/SignDialog/VBoxContainer/DialogText")
+const lines: Array[String] =[
+	"Kys"
+]
 
 func _ready():
-	connect("body_entered", Callable(self, "_on_body_entered"))
-	connect("body_exited",  Callable(self, "_on_body_exited"))
-	# ensure they start hidden
-	prompt.visible = false
-	dialog.visible = false
+	interaction_area.interact = Callable(self, "_on_interact")
 
-func _on_body_entered(body):
-	if body.is_in_group("player"):
-		player_near = true
-		prompt.text    = "Press [E] to read"
-		prompt.visible = true
 
-func _on_body_exited(body):
-	if body.is_in_group("player"):
-		player_near    = false
-		prompt.visible = false
-
-func _process(_delta):
-	if player_near and Input.is_action_just_pressed("interact"):
-		_show_message()
-
-func _show_message():
-	dialog_text.text = message
-	dialog.visible   = true
-	prompt.visible   = false
+#func _oninteract():
+	#DialogManager.start_dialog(global_position, lines, speech_sound)
+	#sprite.flip_h = true if interation_area.get_overlapping_boddies()[0].global_position.x < globalposition.x else false
+	#await DialogManager.dialog_finished
+	#

@@ -22,6 +22,7 @@ func _process(delta):
 size = Vector2(32, 8)
 
 [node name="gplatform" type="AnimatableBody2D"]
+collision_mask = 2
 script = SubResource("GDScript_28bal")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

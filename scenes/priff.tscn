@@ -162,9 +162,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5drvw"]
 size = Vector2(6, 7)
 
-[node name="Priff" type="CharacterBody2D"]
+[node name="Priff" type="CharacterBody2D" groups=["Players"]]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 125
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)

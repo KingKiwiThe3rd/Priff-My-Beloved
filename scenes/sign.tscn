@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bujkn1p61kjea"]
+[gd_scene load_steps=5 format=3 uid="uid://bujkn1p61kjea"]
 
 [ext_resource type="Script" uid="uid://cywxovffr0jpk" path="res://scripts/sign.gd" id="1_kd50q"]
 [ext_resource type="Texture2D" uid="uid://clmw1mrxi32f8" path="res://icon.svg" id="1_shbub"]
+[ext_resource type="Script" uid="uid://oddah65axitv" path="res://scripts/interations_area.gd" id="3_8yyji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kd50q"]
 size = Vector2(21, 16)
 
 [node name="Sign" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_kd50q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -14,5 +16,9 @@ position = Vector2(-2.23517e-07, -1.49012e-07)
 scale = Vector2(0.09375, 0.09375)
 texture = ExtResource("1_shbub")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="."]
+script = ExtResource("3_8yyji")
+metadata/_custom_type_script = "uid://oddah65axitv"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_kd50q")

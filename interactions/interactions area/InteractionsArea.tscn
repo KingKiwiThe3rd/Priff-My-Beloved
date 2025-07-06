@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cekffyv11en2s"]
+
+[ext_resource type="Script" uid="uid://oddah65axitv" path="res://scripts/interations_area.gd" id="1_ki467"]
+
+[node name="InterationsArea" type="Area2D"]
+script = ExtResource("1_ki467")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

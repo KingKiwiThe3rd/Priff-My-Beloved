@@ -11,8 +11,7 @@ script/source = "extends CollisionShape2D
 "
 
 [node name="Spring" type="Area2D"]
-collision_layer = 5
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("1_6vrsj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
