@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://qcob8sd6dwbd"]
 
-[ext_resource type="Texture2D" uid="uid://biwn746b7toud" path="res://assets/sprites/platforms.png" id="1_vt1tk"]
+[ext_resource type="Texture2D" uid="uid://bji4q3i0mm2lh" path="res://assets/sprites/platforms.png" id="1_vt1tk"]
 
 [sub_resource type="GDScript" id="GDScript_28bal"]
 script/source = "# MovingPlatform.gd
