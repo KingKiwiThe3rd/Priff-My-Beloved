@@ -176,6 +176,7 @@ func _physics_process(delta: float) -> void:
 			animated_sprite_2d.play("falling")
 	
 	move_and_slide()
+	_ride_moving_platform(delta)
 
 
 func set_spawn_point(new_spawn_point: Vector2):
@@ -191,6 +192,23 @@ func die_and_respawn():
 		if area is Area2D and area.has_method("check_player_inside"):
 			area.check_player_inside()
 						
+func _ride_moving_platform(delta: float) -> void:
+	if not is_on_floor():
+		return
+
+	# Look at the most recent floor collision
+	var col = get_last_slide_collision()
+	if not col:
+		return
+
+	# Only proceed if that collider is one of our moving platforms
+	var platform = col.get_collider()
+	if not (platform is Node and platform.is_in_group("moving_platform")):
+		return
+
+	# Now it's safe to pull its velocity
+	# (Make sure your MovingPlatform.gd script defines `var velocity`)
+	global_position += platform.velocity * delta
 
 func _process(delta):
 	if Input.is_action_just_pressed("time_slow") and not is_slow_motion:

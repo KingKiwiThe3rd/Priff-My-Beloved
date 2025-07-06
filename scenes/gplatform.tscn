@@ -3,6 +3,20 @@
 [ext_resource type="Texture2D" uid="uid://biwn746b7toud" path="res://assets/sprites/platforms.png" id="1_vt1tk"]
 
 [sub_resource type="GDScript" id="GDScript_28bal"]
+script/source = "# MovingPlatform.gd
+extends Node2D     # or StaticBody2D if you need a physics body
+
+var last_position := Vector2.ZERO
+var velocity := Vector2.ZERO
+
+func _ready():
+	last_position = global_position
+
+func _process(delta):
+	# Calculate how much we moved since last frame
+	velocity = (global_position - last_position) / delta
+	last_position = global_position
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vmlmp"]
 size = Vector2(32, 8)
