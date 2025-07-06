@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var particles = get_node("/root/Game/Priff/CPUParticles2D")
 @onready var dash_manager = $DashManager
 @onready var TSlow_overlay = get_node("../CanvasLayer/TSlowOverlay")
 @onready var tile_map: TileMap = $"../TileMap"
