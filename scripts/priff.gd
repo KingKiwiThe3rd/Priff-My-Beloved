@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var particles = get_node("/root/Game/Priff/CPUParticles2D")
+@onready var Dparticles = get_node("/root/Game/Priff/DashParticles")
+@onready var Jparticles = get_node("/root/Game/Priff/jumpParticles")
 @onready var dash_manager = $DashManager
 @onready var TSlow_overlay = get_node("../CanvasLayer/TSlowOverlay")
 @onready var tile_map: TileMap = $"../TileMap"
@@ -126,6 +127,8 @@ func _physics_process(delta: float) -> void:
 				velocity.y = JUMP_VELOCITY
 				JUMP_AMOUNT -= 1
 				coyote_timer = 0
+				if not is_on_floor():
+					Jparticles.emitting=true
 	
 	var just_landed = is_on_floor() and not was_on_floor and velocity.y >= 0
 	if just_landed and not dash_manager.is_dashing and not is_preparing_jump:
