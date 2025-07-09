@@ -6,7 +6,7 @@ const DASH_INITIAL_BOOST = 340.0
 const DASH_DECAY = 1400.0
 const DASH_TIME = 0.2
 const DASH_COOLDOWN = 0.45
-@onready var particles = get_node("/root/Game/Priff/CPUParticles2D")
+@onready var Dparticles = get_node("/root/Game/Priff/DashParticles")
 
 @onready var priff = get_node("/root/Game/Priff")
 
@@ -55,8 +55,8 @@ func start_dash():
 	if(priff.is_slow_motion==true):
 		priff.stop_slow_motion()
 	is_dashing = true
-	particles.emitting=true
 	var dash_direction = 1 if not player.animated_sprite_2d.flip_h else -1
+	Dparticles.emitting=true
 	player.velocity.x = dash_direction * DASH_INITIAL_BOOST
 	player.velocity.y = 0
 	dash_timer = DASH_TIME
