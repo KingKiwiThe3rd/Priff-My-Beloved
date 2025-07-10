@@ -8,12 +8,19 @@ const lines: Array[String] =[
 	"Kys"
 ]
 
-func _ready():
-	interaction_area.interact = Callable(self, "_on_interact")
 
+func _ready():
+	$InteractionArea.interact = Callable(self, "_on_interact")
 
 func _on_interact():
-	DialogManager.start_dialog(global_position, lines)
-	sprite.flip_h = true if interaction_area.get_overlapping_boddies()[0].global_position.x < global_position.x else false
+	DialogManager.start_dialog(global_position, ["Hello!", "Goodbye!"])
 	await DialogManager.dialog_finished
-	
+#func _ready():
+	#interaction_area.interact = Callable(self, "_on_interact")
+#
+#
+#func _on_interact():
+	#DialogManager.start_dialog(global_position, lines)
+	#sprite.flip_h = true if interaction_area.get_overlapping_boddies()[0].global_position.x < global_position.x else false
+	#await DialogManager.dialog_finished
+	#
