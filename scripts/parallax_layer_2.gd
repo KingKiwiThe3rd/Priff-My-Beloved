@@ -13,7 +13,7 @@ func _ready():
 	sprite.scale = Vector2(sprite_scale, sprite_scale)
 	
 	# Center vertically in the visible area
-	sprite.position = Vector2(screen_size.x/camera_zoom/2, screen_size.y /camera_zoom/2)
+	sprite.position = Vector2(screen_size.x/camera_zoom/2, (screen_size.y /camera_zoom/2)+50)
 	
 	# Scroll slower than camera
 	motion_scale = Vector2(0.2, 0)
