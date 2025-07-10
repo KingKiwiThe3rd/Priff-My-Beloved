@@ -19,7 +19,7 @@ func _on_button_pressed() -> void:
 	for node in selected_nodes:
 		if node is TileMap:
 			var tilemap: TileMap = node
-			var source_id = 3
+			var source_id = 6
 			print("Processing TileMap:", tilemap.name)  # Debug
 			if tilemap.has_method("update_all_tiles"):
 				tilemap.update_all_tiles(source_id)

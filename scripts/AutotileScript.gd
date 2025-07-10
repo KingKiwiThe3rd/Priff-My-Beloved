@@ -1,7 +1,7 @@
 @tool
 extends TileMap
 
-var source_id: int = 3
+var source_id: int = 6
 
 var tile_configs: Dictionary = {
 	0: Vector2i(2, 2),
