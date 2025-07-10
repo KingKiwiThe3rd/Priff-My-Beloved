@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bujkn1p61kjea"]
 
 [ext_resource type="Script" uid="uid://cywxovffr0jpk" path="res://scripts/sign.gd" id="1_kd50q"]
-[ext_resource type="Texture2D" uid="uid://clmw1mrxi32f8" path="res://icon.svg" id="1_shbub"]
+[ext_resource type="Texture2D" uid="uid://dpntro2ih8kgh" path="res://assets/sprites/sign_placeholder.png" id="2_8yyji"]
 [ext_resource type="Script" uid="uid://oddah65axitv" path="res://scripts/interations_area.gd" id="3_8yyji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kd50q"]
@@ -12,9 +12,9 @@ collision_mask = 2
 script = ExtResource("1_kd50q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-2.23517e-07, -1.49012e-07)
-scale = Vector2(0.09375, 0.09375)
-texture = ExtResource("1_shbub")
+position = Vector2(0, -1.19209e-07)
+scale = Vector2(1, 1)
+texture = ExtResource("2_8yyji")
 
 [node name="InteractionArea" type="Area2D" parent="."]
 script = ExtResource("3_8yyji")
