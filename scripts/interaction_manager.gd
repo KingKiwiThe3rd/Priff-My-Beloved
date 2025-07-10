@@ -33,7 +33,7 @@ func _process(delta):
 		active_areas.sort_custom(_sort_by_distance_to_player)    #
 		var a = active_areas[0]    #
 		print(" → closest area is ", a.name, " at ", a.global_position)   #
-		label.text =base_text + active_areas[0].global_position
+		label.text = base_text + active_areas[0].action_name.capitalize()   #had an error here not sure if it means anything
 		label.global_position = active_areas[0].global_position
 		label.global_position.y -= 36
 		label.global_position.x -= label.size.x /2

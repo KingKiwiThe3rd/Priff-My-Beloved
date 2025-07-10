@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfm5ymtjvp8wm"]
 
-[ext_resource type="Texture2D" uid="uid://dpsdenmt1x8j0" path="res://assets/sprites/spikesPlaceholder.png" id="1_7k7bx"]
+[ext_resource type="Texture2D" uid="uid://dfnxdpwkv5hwn" path="res://assets/sprites/spikesPlaceholder.png" id="1_7k7bx"]
 [ext_resource type="PackedScene" uid="uid://xxt3xkunx0u3" path="res://scenes/kill_zone.tscn" id="2_tggh8"]
 
 [node name="Spike" type="Polygon2D"]
